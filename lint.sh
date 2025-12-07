@@ -1,8 +1,8 @@
-cat > lint.sh << 'EOF'
 #!/usr/bin/env bash
 set -e
 
-echo "[LINT] Running fake lint checks"
-sleep 1
-echo "[LINT] All good. No issues found."
-EOF
+echo "[LINT] Activating virtual environment"
+. .venv/bin/activate
+
+echo "[LINT] Running flake8 on app"
+

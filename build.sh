@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
 set -e
 
-echo "[BUILD] Starting build for jenkins-first"
-echo "[BUILD] Workspace: $(pwd)"
+echo "[BUILD] Creating or reusing virtual environment"
 
-mkdir -p dist
-echo "Hello from build at $(date)" > dist/app.txt
+# Create venv if missing
+if [ ! -d ".venv" ]; then
+  python3 -m venv .venv
+fi
 
-echo "[BUILD] Build finished. Files in dist:"
-ls -R dist
+# Activate virtual environment
+. .venv/bin/activate
+
+echo "[BUILD] Installing dependencies"
+pip install --upgrade pip
+pip install -r requirements.txt
+
+echo "[BUILD] Compiling Python files"
+python -m compileall app
+
+echo "[BUILD] Build complete"

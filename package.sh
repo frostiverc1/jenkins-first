@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-echo "[PACKAGE] Packaging dist folder"
+echo "[PACKAGE] Packaging app source"
 
-if [ ! -d dist ]; then
-  echo "[PACKAGE] dist directory not found. Did build run?"
+if [ ! -d app ]; then
+  echo "[PACKAGE] app directory not found"
   exit 1
 fi
 
 mkdir -p artifacts
-tar czf artifacts/app.tar.gz dist
 
-echo "[PACKAGE] Created artifacts/app.tar.gz"
+tar czf artifacts/app-source.tar.gz app tests requirements.txt
+
+echo "[PACKAGE] Created artifacts/app-source.tar.gz"

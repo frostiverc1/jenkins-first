@@ -20,7 +20,7 @@ pipeline {
     }
 
     environment {
-        APP_NAME = 'jenkins-first'
+        APP_NAME = 'jenkins-first-python'
     }
 
     stages {
@@ -82,7 +82,7 @@ pipeline {
     post {
         success {
             echo "Build ${env.BUILD_NUMBER} for ${env.APP_NAME} targeting ${params.TARGET_ENV} completed successfully"
-            archiveArtifacts artifacts: 'artifacts/**', fingerprint: true
+            archiveArtifacts artifacts: 'artifacts/**', fingerprint: true, allowEmptyArchive: false
         }
         failure {
             echo "Build ${env.BUILD_NUMBER} failed. Check logs."
